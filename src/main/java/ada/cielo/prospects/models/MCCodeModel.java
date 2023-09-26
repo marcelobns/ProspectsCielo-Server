@@ -14,5 +14,7 @@ public class MCCodeModel implements Serializable {
     @Id
     @GeneratedValue(generator = "mc_codes_id_seq")
     private Long id;
+    private String code;
+    private String programType;
 
 }
