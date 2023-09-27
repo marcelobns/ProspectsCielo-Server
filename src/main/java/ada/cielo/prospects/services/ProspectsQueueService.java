@@ -18,17 +18,23 @@ public class ProspectsQueueService {
         this.prospectsQueueRepository = prospectsQueueRepository;
     }
 
-    public void save(ProspectsQueueSchema prospectsQueueSchema) {
-        prospectsQueueRepository.save(prospectsQueueSchema.toEntity());
+    public ProspectsQueueSchema save(ProspectsQueueSchema prospectsQueueSchema) {
+        return prospectsQueueRepository.save(prospectsQueueSchema.toEntity()).toSchema();
     }
 
-    public List<ProspectsQueueSchema> findAll() {
-        List<ProspectsQueueEntity> prospectsQueueEntityList = prospectsQueueRepository.findAll();
+    public List<ProspectsQueueSchema> findByTerm(String term) {
+        List<ProspectsQueueEntity> prospectsQueueEntityList = prospectsQueueRepository.findByTerm(term);
         return prospectsQueueEntityList.stream().map(ProspectsQueueEntity::toSchema).toList();
     }
 
     public ProspectsQueueSchema getNext() {
         return prospectsQueueRepository.getNext().toSchema();
+    }
+
+    public ProspectsQueueSchema delete(Long id) {
+        ProspectsQueueEntity prospectsQueueEntity = prospectsQueueRepository.findById(id).orElseThrow();
+        prospectsQueueRepository.delete(prospectsQueueEntity);
+        return prospectsQueueEntity.toSchema();
     }
 
 }

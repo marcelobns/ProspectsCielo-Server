@@ -1,50 +1,78 @@
 package ada.cielo.prospects.controllers;
 
+import ada.cielo.prospects.model.schemas.PreRegistrationSchema;
 import ada.cielo.prospects.model.schemas.ProspectsQueueSchema;
+import ada.cielo.prospects.model.schemas.ResponseSchema;
+import ada.cielo.prospects.services.PreRegistrationService;
 import ada.cielo.prospects.services.ProspectsQueueService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigInteger;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/prospects")
+@RequestMapping("/v1/prospects-queue")
 @Tag(name = "Prospect Queue", description = "Endpoints for managing the prospects queue")
 public class ProspectsQueueController {
 
     private final ProspectsQueueService prospectsQueueService;
+    private final PreRegistrationService preRegistrationService;
 
-    public ProspectsQueueController(ProspectsQueueService prospectsQueueService) {
+    public ProspectsQueueController(ProspectsQueueService prospectsQueueService, PreRegistrationService preRegistrationService) {
         this.prospectsQueueService = prospectsQueueService;
+        this.preRegistrationService = preRegistrationService;
     }
 
     @GetMapping("/")
     @Operation(summary = "List of pre-registrations in the queue")
-    public ResponseEntity<List<ProspectsQueueSchema>> index() {
-        List<ProspectsQueueSchema> prospectsQueueList = this.prospectsQueueService.findAll();
-        return ResponseEntity.ok(prospectsQueueList);
+    public ResponseEntity<ResponseSchema> index(@RequestParam(required = false) String search_term) {
+        try {
+            List<ProspectsQueueSchema> prospectsQueueSchemaList = this.prospectsQueueService.findByTerm(search_term);
+            return ResponseEntity.ok(new ResponseSchema("Success", "Listing Data", prospectsQueueSchemaList));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new ResponseSchema("Error", e.getMessage(), null));
+        }
     }
 
     @GetMapping("/next")
     @Operation(summary = "Get the next prospect from the queue")
-    public ResponseEntity<ProspectsQueueSchema> next() {
-        ProspectsQueueSchema prospectsQueueSchema = this.prospectsQueueService.getNext();
-        return ResponseEntity.ok(prospectsQueueSchema);
+    public ResponseEntity<ResponseSchema> next() {
+        try {
+            ProspectsQueueSchema prospectsQueueSchema = this.prospectsQueueService.getNext();
+            return ResponseEntity.ok(new ResponseSchema("Success", "Next Prospect", prospectsQueueSchema));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new ResponseSchema("Error", e.getMessage(), null));
+        }
     }
 
     @PostMapping("/add")
     @Operation(summary = "Add a pre-registration in the queue")
-    public ResponseEntity<ProspectsQueueSchema> add() {
-        return null;
+    public ResponseEntity<ResponseSchema> add(@Valid @RequestBody ProspectsQueueSchema prospectsQueueSchema) {
+        try {
+            prospectsQueueSchema.setPreRegistration(this.preRegistrationService.findOne(prospectsQueueSchema.getPreRegistrationId()));
+            prospectsQueueSchema.setQueueingAt(LocalDateTime.now());
+
+            prospectsQueueSchema = this.prospectsQueueService.save(prospectsQueueSchema);
+            return ResponseEntity.ok(new ResponseSchema("Success", "New Pre Registration added in queue successfully", prospectsQueueSchema));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new ResponseSchema("Error", e.getMessage(), prospectsQueueSchema));
+        }
     }
 
     @DeleteMapping("/remove")
-    @Operation(summary = "Removes a pre-registration from top of the queue")
-    public String remove() {
-        return null;
+    @Operation(summary = "Removes a pre-registration from first position of the queue")
+    public ResponseEntity<ResponseSchema> remove() {
+        try {
+            ProspectsQueueSchema prospectsQueueSchema = this.prospectsQueueService.getNext();
+            prospectsQueueSchema = this.prospectsQueueService.delete(prospectsQueueSchema.getId());
+            return ResponseEntity.ok(new ResponseSchema("Success", "Pre Registration successfully removed from queue", prospectsQueueSchema));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new ResponseSchema("Error", e.getMessage(), null));
+        }
     }
 }

@@ -12,6 +12,6 @@ import java.util.List;
 public interface PreRegistrationRepository  extends JpaRepository<PreRegistrationEntity, Long> {
 
     @Query(value = "SELECT * FROM pre_registrations " +
-            "WHERE array_to_string(array[cast(id as text), cast(code as text), cast(program_type as text)], '|') ILIKE CONCAT('%', ?1, '%')", nativeQuery = true)
+                   "WHERE array_to_string(array[cast(id as text), cast(registration_type as text), cast(document_number as text), cast(name as text), cast(email as text), cast(attributes as text), cast(mc_code_id as text), cast(op as text), cast(at as text)], '|')  ILIKE CONCAT('%', ?1, '%')", nativeQuery = true)
     List<PreRegistrationEntity> findByTerm(String term);
 }

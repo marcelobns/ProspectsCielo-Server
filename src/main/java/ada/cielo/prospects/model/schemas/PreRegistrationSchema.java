@@ -16,6 +16,8 @@ public class PreRegistrationSchema {
     private String attributes;
     private Long mcCodeId;
     @Schema(hidden = true)
+    private MCCodeSchema mcCode;
+    @Schema(hidden = true)
     private String op;
     @Schema(hidden = true)
     private LocalDateTime at;
@@ -60,6 +62,12 @@ public class PreRegistrationSchema {
     public void setMcCodeId(Long mcCodeId) {
         this.mcCodeId = mcCodeId;
     }
+    public MCCodeSchema getMcCode() {
+        return mcCode;
+    }
+    public void setMcCode(MCCodeSchema mcCode) {
+        this.mcCode = mcCode;
+    }
     public String getOp() {
         return op;
     }
@@ -78,7 +86,8 @@ public class PreRegistrationSchema {
         preRegistration.setId(this.getId());
         preRegistration.setRegistrationType(this.getRegistrationType());
         preRegistration.setDocumentNumber(this.getDocumentNumber());
-        preRegistration.setMcCodeId(this.getMcCodeId());
+        preRegistration.setMcCodeId(this.getMcCode().getId());
+        preRegistration.setMcCode(this.getMcCode().toEntity());
         preRegistration.setEmail(this.getEmail());
         preRegistration.setName(this.getName());
         preRegistration.setAttributes(this.getAttributes());

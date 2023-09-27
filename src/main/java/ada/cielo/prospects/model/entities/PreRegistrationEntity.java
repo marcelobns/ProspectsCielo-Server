@@ -24,12 +24,18 @@ public class PreRegistrationEntity implements Serializable {
     private String name;
     @Column(name = "attributes")
     private String attributes;
-    @Column(name = "mc_code_id")
-    private Long mcCodeId;
+
     @Column(name = "op")
     private String op;
     @Column(name = "at")
     private LocalDateTime at;
+
+    @Transient
+    private Long mcCodeId;
+    @ManyToOne
+    @JoinColumn(name = "mc_code_id", referencedColumnName = "id")
+    private MCCodeEntity mcCode;
+
 
     public Long getId() {
         return id;
@@ -65,12 +71,20 @@ public class PreRegistrationEntity implements Serializable {
     public void setAttributes(String attributes) {
         this.attributes = attributes;
     }
+
     public Long getMcCodeId() {
         return mcCodeId;
     }
     public void setMcCodeId(Long mcCodeId) {
         this.mcCodeId = mcCodeId;
     }
+    public MCCodeEntity getMcCode() {
+        return mcCode;
+    }
+    public void setMcCode(MCCodeEntity mcCode) {
+        this.mcCode = mcCode;
+    }
+
     public String getOp() {
         return op;
     }
@@ -89,7 +103,8 @@ public class PreRegistrationEntity implements Serializable {
         preRegistration.setId(this.getId());
         preRegistration.setDocumentNumber(this.getDocumentNumber());
         preRegistration.setRegistrationType(this.getRegistrationType());
-        preRegistration.setMcCodeId(this.getMcCodeId());
+        preRegistration.setMcCodeId(this.getMcCode().getId());
+        preRegistration.setMcCode(this.getMcCode().toSchema());
         preRegistration.setEmail(this.getEmail());
         preRegistration.setName(this.getName());
         preRegistration.setAttributes(this.getAttributes());
