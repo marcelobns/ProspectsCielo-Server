@@ -35,4 +35,12 @@ public class MCCodeService {
         }
     }
 
+    public List<MCCodeSchema> findByTerm(String term){
+        try {
+            List<MCCodeEntity> mcCodes = mcCodeRepository.findByTerm(term);
+            return mcCodes.stream().map(MCCodeEntity::toSchema).toList();
+        } catch (Exception e) {
+            throw new RuntimeException("Error finding MCCode: " + e.getMessage());
+        }
+    }
 }

@@ -22,7 +22,7 @@ public class PreRegistrationController {
 
     @GetMapping("/")
     @Operation(summary = "List Pre Registrations")
-    public ResponseEntity<List<PreRegistrationSchema>>  index(@RequestParam(required = false) String condition) {
+    public ResponseEntity<List<PreRegistrationSchema>>  index(@RequestParam(required = false) String search) {
         List<PreRegistrationSchema> preRegistrationList = this.preRegistrationService.findAll();
         return ResponseEntity.ok(preRegistrationList);
     }

@@ -15,14 +15,16 @@ public class PreRegistrationEntity implements Serializable {
     private Long id;
     @Column(name = "registration_type")
     private String registrationType;
-    @Column(name = "mc_code_id")
-    private Long mcCodeId;
+    @Column(name = "document_number")
+    private String documentNumber;
     @Column(name = "email")
     private String email;
     @Column(name = "name")
     private String name;
     @Column(name = "attributes")
     private String attributes;
+    @Column(name = "mc_code_id")
+    private Long mcCodeId;
 
     public Long getId() {
         return id;
@@ -36,11 +38,11 @@ public class PreRegistrationEntity implements Serializable {
     public void setRegistrationType(String registrationType) {
         this.registrationType = registrationType;
     }
-    public Long getMcCodeId() {
-        return mcCodeId;
+    public String getDocumentNumber() {
+        return documentNumber;
     }
-    public void setMcCodeId(Long mcCodeId) {
-        this.mcCodeId = mcCodeId;
+    public void setDocumentNumber(String documentNumber) {
+        this.documentNumber = documentNumber;
     }
     public String getEmail() {
         return email;
@@ -60,7 +62,12 @@ public class PreRegistrationEntity implements Serializable {
     public void setAttributes(String attributes) {
         this.attributes = attributes;
     }
-
+    public Long getMcCodeId() {
+        return mcCodeId;
+    }
+    public void setMcCodeId(Long mcCodeId) {
+        this.mcCodeId = mcCodeId;
+    }
     public PreRegistrationSchema toSchema() {
         PreRegistrationSchema preRegistration = new PreRegistrationSchema();
         preRegistration.setId(this.id);

@@ -15,8 +15,6 @@ public class ProspectsQueueEntity implements Serializable {
     private Long preRegistrationId;
     @Column(name = "queueing_at")
     private String queueingAt;
-    @Column(name = "op")
-    private String op;
 
     public Long getId() {
         return id;
@@ -36,19 +34,12 @@ public class ProspectsQueueEntity implements Serializable {
     public void setQueueingAt(String queueingAt) {
         this.queueingAt = queueingAt;
     }
-    public String getOp() {
-        return op;
-    }
-    public void setOp(String op) {
-        this.op = op;
-    }
 
     public ProspectsQueueSchema toSchema(){
         ProspectsQueueSchema prospectsQueue = new ProspectsQueueSchema();
         prospectsQueue.setId(this.id);
         prospectsQueue.setPreRegistrationId(this.preRegistrationId);
         prospectsQueue.setQueueingAt(this.queueingAt);
-        prospectsQueue.setOp(this.op);
 
         return prospectsQueue;
     }

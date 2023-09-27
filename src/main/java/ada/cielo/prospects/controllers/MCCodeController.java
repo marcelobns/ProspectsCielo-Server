@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -24,8 +25,8 @@ public class MCCodeController {
 
     @GetMapping("/")
     @Operation(summary = "List of MCCs")
-    public ResponseEntity<List<MCCodeSchema>> index() {
-        List<MCCodeSchema> mcCodeList = this.mcCodeService.findAll();
+    public ResponseEntity<List<MCCodeSchema>> index(@RequestParam(required = false) String search_term) {
+        List<MCCodeSchema> mcCodeList = this.mcCodeService.findByTerm(search_term);
         return ResponseEntity.ok(mcCodeList);
     }
 }

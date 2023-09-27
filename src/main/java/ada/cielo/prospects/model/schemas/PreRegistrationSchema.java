@@ -6,10 +6,11 @@ public class PreRegistrationSchema {
 
     private Long id;
     private String registrationType;
-    private Long mcCodeId;
+    private String documentNumber;
     private String email;
     private String name;
     private String attributes;
+    private Long mcCodeId;
 
     public Long getId() {
         return id;
@@ -23,11 +24,11 @@ public class PreRegistrationSchema {
     public void setRegistrationType(String registrationType) {
         this.registrationType = registrationType;
     }
-    public Long getMcCodeId() {
-        return mcCodeId;
+    public String getDocumentNumber() {
+        return documentNumber;
     }
-    public void setMcCodeId(Long mcCodeId) {
-        this.mcCodeId = mcCodeId;
+    public void setDocumentNumber(String documentNumber) {
+        this.documentNumber = documentNumber;
     }
     public String getEmail() {
         return email;
@@ -46,6 +47,12 @@ public class PreRegistrationSchema {
     }
     public void setAttributes(String attributes) {
         this.attributes = attributes;
+    }
+    public Long getMcCodeId() {
+        return mcCodeId;
+    }
+    public void setMcCodeId(Long mcCodeId) {
+        this.mcCodeId = mcCodeId;
     }
 
     public PreRegistrationEntity toEntity() {
