@@ -1,8 +1,11 @@
 package ada.cielo.prospects.model.schemas;
 
 import ada.cielo.prospects.model.entities.MCCodeEntity;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 public class MCCodeSchema {
+
+    @Schema(hidden = true)
     private Long id;
     private String code;
     private String programType;

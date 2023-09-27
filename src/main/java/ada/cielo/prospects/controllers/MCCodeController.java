@@ -1,6 +1,7 @@
 package ada.cielo.prospects.controllers;
 
 import ada.cielo.prospects.model.schemas.MCCodeSchema;
+import ada.cielo.prospects.model.schemas.ResponseSchema;
 import ada.cielo.prospects.services.MCCodeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -25,8 +26,12 @@ public class MCCodeController {
 
     @GetMapping("/")
     @Operation(summary = "List of MCCs")
-    public ResponseEntity<List<MCCodeSchema>> index(@RequestParam(required = false) String search_term) {
-        List<MCCodeSchema> mcCodeList = this.mcCodeService.findByTerm(search_term);
-        return ResponseEntity.ok(mcCodeList);
+    public ResponseEntity<ResponseSchema> index(@RequestParam(required = false) String search_term) {
+        try {
+            List<MCCodeSchema> mcCodeList = this.mcCodeService.findByTerm(search_term);
+            return ResponseEntity.ok(new ResponseSchema("Success", "Listing Data", mcCodeList));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new ResponseSchema("Error", e.getMessage(), null));
+        }
     }
 }

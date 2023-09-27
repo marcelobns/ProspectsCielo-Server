@@ -24,13 +24,13 @@ public class ProspectsQueueController {
 
     @GetMapping("/")
     @Operation(summary = "List of pre-registrations in the queue")
-    public ResponseEntity<List<ProspectsQueueSchema>> index(@RequestParam(required = false) String search) {
+    public ResponseEntity<List<ProspectsQueueSchema>> index() {
         List<ProspectsQueueSchema> prospectsQueueList = this.prospectsQueueService.findAll();
         return ResponseEntity.ok(prospectsQueueList);
     }
 
     @GetMapping("/next")
-    @Operation(summary = "Get the next prospect in the queue")
+    @Operation(summary = "Get the next prospect from the queue")
     public ResponseEntity<ProspectsQueueSchema> next() {
         ProspectsQueueSchema prospectsQueueSchema = this.prospectsQueueService.getNext();
         return ResponseEntity.ok(prospectsQueueSchema);
@@ -38,19 +38,13 @@ public class ProspectsQueueController {
 
     @PostMapping("/add")
     @Operation(summary = "Add a pre-registration in the queue")
-    public String add() {
-        return null;
-    }
-
-    @PutMapping("/edit")
-    @Operation(summary = "Repositions a pre-registration in the queue")
-    public String edit(@RequestParam(required = true) BigInteger id) {
+    public ResponseEntity<ProspectsQueueSchema> add() {
         return null;
     }
 
     @DeleteMapping("/remove")
-    @Operation(summary = "Removes a pre-registration from the queue")
-    public String remove(@RequestParam(required = true) BigInteger id) {
+    @Operation(summary = "Removes a pre-registration from top of the queue")
+    public String remove() {
         return null;
     }
 }

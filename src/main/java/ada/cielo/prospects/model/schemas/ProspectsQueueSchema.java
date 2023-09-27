@@ -1,9 +1,11 @@
 package ada.cielo.prospects.model.schemas;
 
 import ada.cielo.prospects.model.entities.ProspectsQueueEntity;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 public class ProspectsQueueSchema {
 
+    @Schema(hidden = true)
     private Long id;
     private Long preRegistrationId;
     private String queueingAt;

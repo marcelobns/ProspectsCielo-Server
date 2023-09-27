@@ -19,28 +19,16 @@ public class MCCodeService {
     }
 
     public void save(MCCodeSchema mcCodeSchema) {
-        try {
-            mcCodeRepository.save(mcCodeSchema.toEntity());
-        } catch (Exception e) {
-            throw new RuntimeException("Error saving MCCode: " + e.getMessage());
-        }
+        mcCodeRepository.save(mcCodeSchema.toEntity());
     }
 
     public List<MCCodeSchema> findAll() {
-        try {
-            List<MCCodeEntity> mcCodes = mcCodeRepository.findAll();
-            return mcCodes.stream().map(MCCodeEntity::toSchema).toList();
-        } catch (Exception e) {
-            throw new RuntimeException("Error finding MCCode: " + e.getMessage());
-        }
+        List<MCCodeEntity> mcCodes = mcCodeRepository.findAll();
+        return mcCodes.stream().map(MCCodeEntity::toSchema).toList();
     }
 
     public List<MCCodeSchema> findByTerm(String term){
-        try {
-            List<MCCodeEntity> mcCodes = mcCodeRepository.findByTerm(term);
-            return mcCodes.stream().map(MCCodeEntity::toSchema).toList();
-        } catch (Exception e) {
-            throw new RuntimeException("Error finding MCCode: " + e.getMessage());
-        }
+        List<MCCodeEntity> mcCodes = mcCodeRepository.findByTerm(term);
+        return mcCodes.stream().map(MCCodeEntity::toSchema).toList();
     }
 }

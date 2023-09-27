@@ -19,20 +19,12 @@ public class ProspectsQueueService {
     }
 
     public void save(ProspectsQueueSchema prospectsQueueSchema) {
-        try {
-            prospectsQueueRepository.save(prospectsQueueSchema.toEntity());
-        } catch (Exception e) {
-            throw new RuntimeException("Error saving MCCode: " + e.getMessage());
-        }
+        prospectsQueueRepository.save(prospectsQueueSchema.toEntity());
     }
 
     public List<ProspectsQueueSchema> findAll() {
-        try {
-            List<ProspectsQueueEntity> prospectsQueueEntityList = prospectsQueueRepository.findAll();
-            return prospectsQueueEntityList.stream().map(ProspectsQueueEntity::toSchema).toList();
-        } catch (Exception e) {
-            throw new RuntimeException("Error finding MCCode: " + e.getMessage());
-        }
+        List<ProspectsQueueEntity> prospectsQueueEntityList = prospectsQueueRepository.findAll();
+        return prospectsQueueEntityList.stream().map(ProspectsQueueEntity::toSchema).toList();
     }
 
     public ProspectsQueueSchema getNext() {
