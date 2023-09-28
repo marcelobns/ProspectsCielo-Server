@@ -37,7 +37,7 @@ public class PreRegistrationController {
     @Operation(summary = "Add a new Pre Registration")
     public ResponseEntity<ResponseSchema> add(@Valid @RequestBody PreRegistrationSchema preRegistrationSchema) {
         try {
-            preRegistrationSchema.setOp("Create");
+            preRegistrationSchema.setOp("Created");
             preRegistrationSchema.setAt(LocalDateTime.now());
             preRegistrationSchema.validate();
             preRegistrationSchema = this.preRegistrationService.save(preRegistrationSchema);
@@ -52,7 +52,7 @@ public class PreRegistrationController {
     public ResponseEntity<ResponseSchema> edit(@PathVariable Long id, @Valid @RequestBody PreRegistrationSchema preRegistrationSchema) {
         try {
             preRegistrationSchema.setId(id);
-            preRegistrationSchema.setOp("Update");
+            preRegistrationSchema.setOp("Updated");
             preRegistrationSchema.setAt(LocalDateTime.now());
             preRegistrationSchema.validate();
             preRegistrationSchema = this.preRegistrationService.save(preRegistrationSchema);

@@ -17,7 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/v1/prospects-queue")
-@Tag(name = "Prospect Queue", description = "Endpoints for managing the prospects queue")
+@Tag(name = "Prospects Queue", description = "Endpoints for managing the prospects queue")
 public class ProspectsQueueController {
 
     private final ProspectsQueueService prospectsQueueService;

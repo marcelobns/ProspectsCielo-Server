@@ -44,7 +44,7 @@ public class PreRegistrationServiceTest {
         schema.setMcCode(mcCodeSchema);
         schema.setMcCodeId(mcCodeSchema.getId());
         schema.setAttributes("{'key': 'value'}");
-        schema.setOp("Create");
+        schema.setOp("Created");
         schema.setAt(LocalDateTime.now());
 
         PreRegistrationEntity entity = schema.toEntity();
@@ -70,7 +70,7 @@ public class PreRegistrationServiceTest {
                 "person_name@email.com",
                 "Person Name",
                 "{}",
-                "Create",
+                "Created",
                 LocalDateTime.now(),
                 mcCodeSchema.toEntity());
 
@@ -90,7 +90,7 @@ public class PreRegistrationServiceTest {
                         "email1@email.com",
                         "Name1 Surname1",
                         "{}",
-                        "Create",
+                        "Created",
                         LocalDateTime.now(), new MCCodeEntity()),
                 new PreRegistrationEntity(
                         2L,
@@ -99,7 +99,7 @@ public class PreRegistrationServiceTest {
                         "email2@email.com",
                         "Name2 Surname2",
                         "{}",
-                        "Create",
+                        "Created",
                         LocalDateTime.now(),
                         new MCCodeEntity())
         );
@@ -121,7 +121,7 @@ public class PreRegistrationServiceTest {
                 "person_name@email.com",
                 "Person Name",
                 "{}",
-                "Create",
+                "Created",
                 LocalDateTime.now(),
                 new MCCodeEntity());
 

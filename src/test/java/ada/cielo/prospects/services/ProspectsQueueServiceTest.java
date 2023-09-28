@@ -36,7 +36,7 @@ public class ProspectsQueueServiceTest {
         preRegistrationSchema.setName("Name of person 0");
         preRegistrationSchema.setEmail("person_name@email.com");
         preRegistrationSchema.setAttributes("{'key': 'value'}");
-        preRegistrationSchema.setOp("Create");
+        preRegistrationSchema.setOp("Created");
         preRegistrationSchema.setAt(LocalDateTime.now());
 
         ProspectsQueueSchema schema = new ProspectsQueueSchema();
