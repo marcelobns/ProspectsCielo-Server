@@ -42,6 +42,15 @@ public class MCCodeEntity implements Serializable {
         this.programType = programType;
     }
 
+    //Note: Será utilizado somente para mockar os testes
+    public MCCodeEntity(String code, String programType) {
+        this.code = code;
+        this.programType = programType;
+    }
+
+    public MCCodeEntity() {
+    }
+
     public MCCodeSchema toSchema() {
         MCCodeSchema mcCode = new MCCodeSchema();
         mcCode.setId(this.id);

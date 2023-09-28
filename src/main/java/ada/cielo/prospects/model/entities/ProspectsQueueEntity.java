@@ -14,7 +14,8 @@ public class ProspectsQueueEntity implements Serializable {
     private Long id;
     @Column(name = "queueing_at")
     private LocalDateTime queueingAt;
-
+    @Transient
+    private Long preRegistrationId;
     @ManyToOne
     @JoinColumn(name = "pre_registration_id", referencedColumnName = "id")
     private PreRegistrationEntity preRegistration;
@@ -25,8 +26,11 @@ public class ProspectsQueueEntity implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-    public Long getPreRegistrationId() {return preRegistration.getId();}
-    public void setPreRegistrationId(Long preRegistrationId) {this.preRegistration.setId(preRegistrationId);}
+    public Long getPreRegistrationId() {return preRegistrationId;}
+    public void setPreRegistrationId(Long preRegistrationId) {
+        this.preRegistrationId = preRegistrationId;
+
+    }
     public PreRegistrationEntity getPreRegistration() {return preRegistration;}
     public void setPreRegistration(PreRegistrationEntity preRegistration) {this.preRegistration = preRegistration;}
     public LocalDateTime getQueueingAt() {

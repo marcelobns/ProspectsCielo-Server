@@ -45,7 +45,7 @@ public class ProspectsQueueSchema {
     public ProspectsQueueEntity toEntity(){
         ProspectsQueueEntity prospectsQueue = new ProspectsQueueEntity();
         prospectsQueue.setId(this.getId());
-        prospectsQueue.setPreRegistrationId(this.getPreRegistration().getId());
+        prospectsQueue.setPreRegistrationId(this.getPreRegistrationId());
         prospectsQueue.setPreRegistration(this.getPreRegistration().toEntity());
         prospectsQueue.setQueueingAt(this.getQueueingAt());
 

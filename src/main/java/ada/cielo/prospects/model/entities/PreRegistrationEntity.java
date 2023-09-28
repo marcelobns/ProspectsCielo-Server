@@ -1,5 +1,6 @@
 package ada.cielo.prospects.model.entities;
 
+import ada.cielo.prospects.model.schemas.MCCodeSchema;
 import ada.cielo.prospects.model.schemas.PreRegistrationSchema;
 import jakarta.persistence.*;
 
@@ -96,6 +97,21 @@ public class PreRegistrationEntity implements Serializable {
     }
     public void setAt(LocalDateTime at) {
         this.at = at;
+    }
+
+    public PreRegistrationEntity() {
+    }
+
+    public PreRegistrationEntity(Long id, String registrationType, String documentNumber, String email, String name, String attributes, String op, LocalDateTime at, MCCodeEntity mcCode) {
+        this.id = id;
+        this.registrationType = registrationType;
+        this.documentNumber = documentNumber;
+        this.email = email;
+        this.name = name;
+        this.attributes = attributes;
+        this.op = op;
+        this.at = at;
+        this.mcCode = mcCode;
     }
 
     public PreRegistrationSchema toSchema() {

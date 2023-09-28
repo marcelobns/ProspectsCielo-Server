@@ -83,16 +83,16 @@ public class PreRegistrationSchema {
 
     public PreRegistrationEntity toEntity() {
         PreRegistrationEntity preRegistration = new PreRegistrationEntity();
-        preRegistration.setId(this.getId());
-        preRegistration.setRegistrationType(this.getRegistrationType());
-        preRegistration.setDocumentNumber(this.getDocumentNumber());
-        preRegistration.setMcCodeId(this.getMcCode().getId());
-        preRegistration.setMcCode(this.getMcCode().toEntity());
-        preRegistration.setEmail(this.getEmail());
-        preRegistration.setName(this.getName());
-        preRegistration.setAttributes(this.getAttributes());
-        preRegistration.setOp(this.getOp());
-        preRegistration.setAt(this.getAt());
+        preRegistration.setId(this.id);
+        preRegistration.setRegistrationType(this.registrationType);
+        preRegistration.setDocumentNumber(this.documentNumber);
+        preRegistration.setMcCodeId(this.mcCodeId);
+        preRegistration.setMcCode(this.mcCode.toEntity());
+        preRegistration.setEmail(this.email);
+        preRegistration.setName(this.name);
+        preRegistration.setAttributes(this.attributes);
+        preRegistration.setOp(this.op);
+        preRegistration.setAt(this.at);
 
         return preRegistration;
     }
