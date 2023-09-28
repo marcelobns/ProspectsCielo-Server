@@ -28,7 +28,7 @@ public class ProspectsQueueController {
         this.preRegistrationService = preRegistrationService;
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     @Operation(summary = "List of pre-registrations in the queue")
     public ResponseEntity<ResponseSchema> index(@RequestParam(required = false) String search_term) {
         try {

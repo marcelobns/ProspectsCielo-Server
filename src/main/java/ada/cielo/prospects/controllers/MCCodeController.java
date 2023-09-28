@@ -24,7 +24,7 @@ public class MCCodeController {
         this.mcCodeService = mcCodeService;
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     @Operation(summary = "List of MCCs")
     public ResponseEntity<ResponseSchema> index(@RequestParam(required = false) String search_term) {
         try {

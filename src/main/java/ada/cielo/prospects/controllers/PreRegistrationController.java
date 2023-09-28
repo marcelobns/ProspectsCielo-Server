@@ -22,7 +22,7 @@ public class PreRegistrationController {
         this.preRegistrationService = preRegistrationService;
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     @Operation(summary = "List Pre Registrations")
     public ResponseEntity<ResponseSchema> index(@RequestParam(required = false) String search_term) {
         try {
