@@ -25,6 +25,8 @@ public class PreRegistrationEntity implements Serializable {
     private String name;
     @Column(name = "attributes")
     private String attributes;
+    @Column(name = "status")
+    private String status;
 
     @Column(name = "op")
     private String op;
@@ -37,6 +39,8 @@ public class PreRegistrationEntity implements Serializable {
     @JoinColumn(name = "mc_code_id", referencedColumnName = "id")
     private MCCodeEntity mcCode;
 
+    @Column(name = "observation")
+    private String observation;
 
     public Long getId() {
         return id;
@@ -72,7 +76,8 @@ public class PreRegistrationEntity implements Serializable {
     public void setAttributes(String attributes) {
         this.attributes = attributes;
     }
-
+    public String getStatus() {return status;}
+    public void setStatus(String status) {this.status = status;}
     public Long getMcCodeId() {
         return mcCodeId;
     }
@@ -82,6 +87,7 @@ public class PreRegistrationEntity implements Serializable {
     public MCCodeEntity getMcCode() {
         return mcCode;
     }
+
     public void setMcCode(MCCodeEntity mcCode) {
         this.mcCode = mcCode;
     }
@@ -99,9 +105,13 @@ public class PreRegistrationEntity implements Serializable {
         this.at = at;
     }
 
+    public String getObservation() {return observation;}
+    public void setObservation(String observation) {this.observation = observation;}
+
     public PreRegistrationEntity() {
     }
 
+    //For tests only
     public PreRegistrationEntity(Long id, String registrationType, String documentNumber, String email, String name, String attributes, String op, LocalDateTime at, MCCodeEntity mcCode) {
         this.id = id;
         this.registrationType = registrationType;
@@ -124,8 +134,10 @@ public class PreRegistrationEntity implements Serializable {
         preRegistration.setEmail(this.getEmail());
         preRegistration.setName(this.getName());
         preRegistration.setAttributes(this.getAttributes());
+        preRegistration.setStatus(this.getStatus());
         preRegistration.setOp(this.getOp());
         preRegistration.setAt(this.getAt());
+        preRegistration.setObservation(this.getObservation());
 
         return preRegistration;
     }

@@ -1,11 +1,10 @@
 package ada.cielo.prospects.services;
 
-import ada.cielo.prospects.model.entities.MCCodeEntity;
 import ada.cielo.prospects.model.repositories.PreRegistrationRepository;
-import ada.cielo.prospects.model.schemas.MCCodeSchema;
 import ada.cielo.prospects.model.schemas.PreRegistrationSchema;
 import ada.cielo.prospects.model.entities.PreRegistrationEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,8 +29,16 @@ public class PreRegistrationService {
         return preRegistrationEntity.toSchema();
     }
 
-    public List<PreRegistrationSchema> findByTerm(String term){
-        List<PreRegistrationEntity> preRegistrationEntityList = preRegistrationsRepository.findByTerm(term);
+    public List<PreRegistrationSchema> findByTerm(String term, String order){
+        if (term == null) term = "%";
+        if (order == null) order = "id asc";
+
+        String orderField = order.split(" ")[0];
+        String orderDirection = order.split(" ")[1];
+        Sort.Direction direction = orderDirection.equals("asc") ? Sort.Direction.ASC : Sort.Direction.DESC;
+        Sort sort = Sort.by(direction, orderField);
+
+        List<PreRegistrationEntity> preRegistrationEntityList = preRegistrationsRepository.findByTerm(term, sort);
         return preRegistrationEntityList.stream().map(PreRegistrationEntity::toSchema).toList();
     }
 

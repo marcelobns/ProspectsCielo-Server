@@ -1,9 +1,13 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/prospects_cielo
+#    url: jdbc:postgresql://localhost:5432/prospects_cielo
+#    driverClassName: org.postgresql.Driver
+#    username: postgres
+#    password:
+    url: jdbc:postgresql://database-2.cjhimtpx0bz9.us-east-2.rds.amazonaws.com:5432/postgres
     driverClassName: org.postgresql.Driver
     username: postgres
-    password:
+    password: senhateste
   jpa:
     hibernate:
       ddl-auto: update

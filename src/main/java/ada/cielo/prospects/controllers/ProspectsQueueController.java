@@ -64,11 +64,11 @@ public class ProspectsQueueController {
         }
     }
 
-    @DeleteMapping("/remove")
-    @Operation(summary = "Removes a pre-registration from first position of the queue")
-    public ResponseEntity<ResponseSchema> remove() {
+    @DeleteMapping("/remove/{pre_registration_id}")
+    @Operation(summary = "Removes a pre-registration from the queue")
+    public ResponseEntity<ResponseSchema> remove(@PathVariable Long pre_registration_id) {
         try {
-            ProspectsQueueSchema prospectsQueueSchema = this.prospectsQueueService.getNext();
+            ProspectsQueueSchema prospectsQueueSchema = this.prospectsQueueService.findByPreRegistrationId(pre_registration_id);
             prospectsQueueSchema = this.prospectsQueueService.delete(prospectsQueueSchema.getId());
             return ResponseEntity.ok(new ResponseSchema("Success", "Pre Registration successfully removed from queue", prospectsQueueSchema));
         } catch (Exception e) {

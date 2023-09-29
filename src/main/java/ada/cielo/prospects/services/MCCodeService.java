@@ -31,4 +31,9 @@ public class MCCodeService {
         List<MCCodeEntity> mcCodes = mcCodeRepository.findByTerm(term);
         return mcCodes.stream().map(MCCodeEntity::toSchema).toList();
     }
+
+    public MCCodeSchema findById(Long id) {
+        MCCodeEntity mcCode = mcCodeRepository.findById(id).orElseThrow();
+        return mcCode.toSchema();
+    }
 }

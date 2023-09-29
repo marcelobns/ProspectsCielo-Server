@@ -1,7 +1,9 @@
 package ada.cielo.prospects.services;
 
+import ada.cielo.prospects.model.entities.PreRegistrationEntity;
 import ada.cielo.prospects.model.entities.ProspectsQueueEntity;
 import ada.cielo.prospects.model.repositories.ProspectsQueueRepository;
+import ada.cielo.prospects.model.schemas.PreRegistrationSchema;
 import ada.cielo.prospects.model.schemas.ProspectsQueueSchema;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +31,16 @@ public class ProspectsQueueService {
 
     public ProspectsQueueSchema getNext() {
         return prospectsQueueRepository.getNext().toSchema();
+    }
+
+    public ProspectsQueueSchema findById(Long id) {
+        ProspectsQueueEntity prospectsQueueEntity = prospectsQueueRepository.findById(id).orElseThrow();
+        return prospectsQueueEntity.toSchema();
+    }
+
+    public ProspectsQueueSchema findByPreRegistrationId(Long preRegistrationId) {
+        ProspectsQueueEntity prospectsQueueEntity = prospectsQueueRepository.findByPreRegistrationId(preRegistrationId);
+        return prospectsQueueEntity.toSchema();
     }
 
     public ProspectsQueueSchema delete(Long id) {

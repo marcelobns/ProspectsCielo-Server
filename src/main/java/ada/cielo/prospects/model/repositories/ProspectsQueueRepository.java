@@ -34,4 +34,8 @@ public interface ProspectsQueueRepository  extends JpaRepository<ProspectsQueueE
                     "        cast(prospects_queue.queueing_at as text) " +
                     "    ], '|') ILIKE CONCAT('%', ?1, '%')", nativeQuery = true)
     List<ProspectsQueueEntity> findByTerm(String term);
+
+
+    @Query(value = "SELECT * FROM prospects_queue WHERE pre_registration_id = ?1 ", nativeQuery = true)
+    ProspectsQueueEntity findByPreRegistrationId(Long preRegistrationId);
 }
